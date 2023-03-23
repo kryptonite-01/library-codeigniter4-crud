@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Controllers\Books;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -31,6 +33,13 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->get('list', 'Books::index');
+$routes->get('create', 'Books::createBook');
+$routes->post('save', 'Books::saveBook');
+$routes->get('delete/(:num)', 'Books::deleteBook/$1');
+$routes->get('edit/(:num)', 'Books::editBook/$1');
+$routes->post('update', 'Books::updateBook');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
@@ -47,3 +56,4 @@ $routes->get('/', 'Home::index');
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
+
